@@ -40,5 +40,7 @@ app.use("/sales", salesRoutes)
 const port = process.env.PORT || 9000
 mongoose.connect(process.env.MONGO_URL).then(() => {
     app.listen(port, () => console.log(`Server port : ${port}`))
+
+
 }).catch((error) => console.log(`${error} : Not connect`)
 )

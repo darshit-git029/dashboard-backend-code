@@ -6,9 +6,8 @@ import getCountryIso3 from "country-iso-2-to-3"
 
 export const getProducts = async (req, res) => {
     try {
-        // const {id} = req.params
         const products = await Product.find()
-
+        
         const ProductWithStat = await Promise.all(
             products.map(async (product) => {
                 const stat = await ProductStat.find({
@@ -20,7 +19,9 @@ export const getProducts = async (req, res) => {
                 }
             })
         )
+
         res.status(200).json(ProductWithStat)
+        
     } catch (error) {
         console.log(error);
         res.status(404).json({ message: error.message })
@@ -30,6 +31,7 @@ export const getProducts = async (req, res) => {
 export const getCustomers = async (req, res) => {
     try {
         const customers = await User.find({ role: "user" }).select("-password")
+        
         res.status(200).json(customers)
 
     } catch (error) {
